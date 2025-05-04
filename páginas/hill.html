@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CryptoMath</title>
+    <link rel="stylesheet" href="/styles.css"/>
+    <link rel="stylesheet" href="/styles/hill-styles.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js"></script>
+    <script defer src="/geral-script.js"></script>
+    <script defer src="/scripts/hill-script.js"></script>
+  </head>
+
+  <body onclick="fillInteractiveContent()">
+    <header>
+      <img id="logo" src="/imgs/logo.png" alt="Logo CryptoMath"/>
+      <h1>CryptoMath</h1>
+    </header>
+
+    <main class="container">
+        <h2>Cifra de Hill</h2>
+        <p>A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de padrões mais difícil de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.</p>
+        
+        
+        <p><p1>1° passo: </p1>Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
+        A mensagem deve ser colocada em uma matriz com duas linhas.
+        </p>
+        <div class="interactive-content container">
+          <label>Mensagem:</label><input id="plainText" type="text" onformchange="fillInteractiveContent()">
+          <div style="display: flex; flex-direction: row; justify-content: center; flex-wrap: nowrap; align-self: center; margin-top: 2vh;">
+            <div class="matrix" id="mc1"></div>
+            <p style="margin-left: 1vw; margin-right: 1vw;">➡️</p>
+            <div class="matrix" id="mn1"></div>
+          </div>
+        </div>
+
+        <p>Conteúdos relacionados:</p>
+        <ul>
+          <li>Matrizes</li>
+          <li>Aritmética modular</li>
+        </ul>
+
+    </main>
+  </body>
+</html>
