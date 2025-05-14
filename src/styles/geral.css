@@ -62,7 +62,7 @@ main {
     border: solid 1px rgba(255, 255, 255, 0.185);
     padding: 1vw;
     /*background-color: #13131a;*/
-    background-color: #46456627;
+    background-color: rgba(70, 69, 102, 0.153);
     border-radius: 8px;
 }
 
@@ -96,9 +96,11 @@ input {
     color: inherit;
     margin-left: 1vw;
 }
+
 ul {
     margin-top: 0;
 }
+
 p1 {
     color: #00b7ff;
 }
