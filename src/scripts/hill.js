@@ -1,6 +1,7 @@
 const charMatrix1El = document.getElementById('mc1')
 const numberMatrix1El = document.getElementById('mn1')
 const plainTextInputEl = document.getElementById('plainText')
+const keyMatrixEl = document.getElementById('key-matrix')
 
 const alphabetMap = new Map()
 // Letras de a a z
@@ -9,12 +10,15 @@ for (let i = 0; i < 26; i++) {
     const number = i + 1
     alphabetMap.set(letter, number)
     alphabetMap.set(number, letter)
-  }
-  // Espaço
-  alphabetMap.set(' ', 27)
-  alphabetMap.set(27, ' ')
+}
+// Espaço
+alphabetMap.set(' ', 27)
+alphabetMap.set(27, ' ')
+// Ponto final
+alphabetMap.set('.', 28)
+alphabetMap.set(28, '.')
 
-function texttoLetterMatrix(text) {
+function textToLetterMatrix(text) {
     let charMatrix = [[], []]
 
     if (text.length % 2 == 1)
@@ -43,46 +47,63 @@ function encrypt(numberMatrix, keyMatrix) {
     
     for (let i = 0; i < cipherMatrix.length; i++)
         for (let j = 0; j < cipherMatrix[0].length; j++)
-            cipherMatrix[i][j] = math.mod(cipherMatrix[i][j], 27)
+            cipherMatrix[i][j] = math.mod(cipherMatrix[i][j], 28)
     return cipherMatrix
 }
 
 function fillMatrix(matrixEl, matrix) {
-    matrixEl.innerHTML = ''
+    matrixEl.innerHTML = '';
 
-    if(matrix[0].length === 0) {
-        matrixEl.innerHTML = ''
-        return
-    }
+    matrix[0].forEach(element => {
+        let newCell = document.createElement('input')
+        newCell.type = 'text'
+        newCell.className = 'cell'
+        newCell.style.gridRow = '1'
+        newCell.disabled = true
+        newCell.value = element
 
-    let row1 = ''
-    let row2 = ''
+        matrixEl.appendChild(newCell)
+    });
 
-    for(let j = 0; j < (matrix[0].length - 1); j++) {
-        row1 += matrix[0][j]
-        row2 += matrix[1][j]
-        row1 += ', '
-        row2 += ', '
-    }
-    row1 += matrix[0][(matrix[0].length - 1)]
-    row2 += matrix[1][(matrix[0].length - 1)]
-    matrixEl.innerHTML = row1 + '<br>' + row2
+    matrix[1].forEach(element => {
+        let newCell = document.createElement('input')
+        newCell.type = 'text'
+        newCell.className = 'cell'
+        newCell.disabled = true
+        newCell.style.gridRow = '2'
+        newCell.value = element
+
+        matrixEl.appendChild(newCell)
+    });
 }
 
-const A = [
-    [4, 2],
-    [3, 4]
-];
-const Key = math.matrix([
-    [4, 5],
-    [7, 9]
-  ]);  
+function completeKey(keyMatrixEl) {
+    // key = [a b]
+    //       [c d]
+    let a = keyMatrixEl.children[0].value
+    let b = keyMatrixEl.children[1].value
+    let c = keyMatrixEl.children[2].value
 
-const resultado = encrypt(A, Key);
-console.log(resultado);
+    let mod = 28
+
+    let aInv = math.invmod(a, mod)
+
+    d = math.mod((b * c + 1) * aInv, mod)
+
+    keyMatrixEl.children[3].value = d
+}
 
 function fillInteractiveContent() {
-    
+    let plainText = plainTextInputEl.value
+    let charMatrix = textToLetterMatrix(plainText)
+
+    let numberMatrix = letterMatrixToNumberMatrix(charMatrix)
+
     fillMatrix(charMatrix1El, charMatrix)
     fillMatrix(numberMatrix1El, numberMatrix)
-} 
+
+    //second step
+    completeKey(keyMatrixEl)
+}
+
+fillInteractiveContent()
