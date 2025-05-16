@@ -24,7 +24,7 @@
     <p>A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de padrões mais difícil
       de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.
     </p>
-    <p>
+    <!--<p>
       <p1>1º passo: </p1>Escolher a matriz chave 2x2: A matriz chave 2x2 é selecionada, sendo importante que seja invertível
       (determinante diferente de zero).
     </p>
@@ -48,33 +48,44 @@
       <p1>5º passo: </p1>Descriptografar a mensagem: O destinatário calcula a matriz chave inversa e a multiplica pela mensagem
       cifrada, restaurando os números originais, que são então convertidos de volta em letras para recuperar a mensagem
       original.
-    </p>
-
+    </p>-->
 
     <p>
-      <p1>1º passo: <br></p1>Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
-      Vamos colocar a mensagem em um matriz de duas linhas.
+      <p1>1º passo: Escolher a chave</p1>
     </p>
+
     <div class="interactive-content container">
-      <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" value="abcd">
-      <div id="rel-0-1">
-        <div class="matrix" id="mc1"></div>
-        <p style="margin-left: 1vw; margin-right: 1vw;">➡️</p>
-        <div class="matrix" id="mn1"></div>
+      <div class="matrix" id="key-matrix-1">
+        <input class="cell l1" type="number" id="key-1-1" value="1">
+        <input class="cell l1" type="number" id="key-1-2" value="3">
+        <input class="cell" type="number" id="key-2-1" value="6">
+        <input class="cell" type="number" id="key-2-2" disabled>
       </div>
     </div>
 
     <p>
-      <p1>2º passo: Montar a chave</p1>
+      <p1>2º passo: Converter a mensagem em números<br></p1>Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
+      Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas seja par.
     </p>
-
-    <div class="interactive-content">
-      <div class="matrix" id="key-matrix">
-        <input class="cell l1" type="number" id="key-1-1" value="5">
-        <input class="cell l1" type="number" id="key-1-2" value="3">
-        <input class="cell" type="number" id="key-2-1" value="4">
-        <input class="cell" type="number" id="key-2-2" disabled>
+    <div class="interactive-content container">
+      <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" value="abcd">
+      <div class="rel">
+        <div class="matrix" id="text-message-1"></div>
+        <p style="margin-left: 1vw; margin-right: 1vw;">➡️</p>
+        <div class="matrix" id="numeric-message-1"></div>
       </div>
+    </div>
+
+    <p>
+      <p1>3º passo: Criptografar a mensagem</p1><br>
+      Agora, multiplicaremos a mensagem pela matriz chave para criptografar.
+    </p>
+    <div class="interactive-content container rel">
+      <div class="matrix" id="numeric-message-2"></div>
+      <p style="margin-left: 1vw; margin-right: 1vw;">x</p>
+      <div class="matrix" id="key-matrix-2"></div>
+      <p style="margin-left: 1vw; margin-right: 1vw;">=</p>
+      <div class="matrix" id="numeric-encrypted-1"></div>
     </div>
 
     <p>Conteúdos relacionados:</p>

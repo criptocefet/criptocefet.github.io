@@ -1,7 +1,10 @@
-const charMatrix1El = document.getElementById('mc1')
-const numberMatrix1El = document.getElementById('mn1')
+const textMatrix1El = document.getElementById('text-message-1')
+const numericMatrix1El = document.getElementById('numeric-message-1')
+const numericMatrix2El = document.getElementById('numeric-message-2')
 const plainTextInputEl = document.getElementById('plainText')
-const keyMatrixEl = document.getElementById('key-matrix')
+const keyMatrix1El = document.getElementById('key-matrix-1')
+const keyMatrix2El = document.getElementById('key-matrix-2')
+const numericEncryptedMatrixEl = document.getElementById('numeric-encrypted-1')
 
 const alphabetMap = new Map()
 // Letras de a a z
@@ -19,36 +22,55 @@ alphabetMap.set('.', 28)
 alphabetMap.set(28, '.')
 
 function textToLetterMatrix(text) {
-    let charMatrix = [[], []]
+    let textMatrix = [[], []]
 
-    if (text.length % 2 == 1)
+    // Garante que o texto tenha número par de caracteres
+    if (text.length % 2 === 1)
         text += ' '
 
-    for(let i = 0; i < text.length / 2; i++) {
-        charMatrix[0][i] = text[i]
-        charMatrix[1][i] = text[i+(text.length/2)]
+    if ((text.length / 2) % 2 === 1) {
+        text += '  '
     }
 
-    return charMatrix
+    for (let i = 0; i < text.length / 2; i++) {
+        textMatrix[0][i] = text[i]
+        textMatrix[1][i] = text[i + (text.length / 2)]
+    }
+
+    return textMatrix
 }
 
-function letterMatrixToNumberMatrix(letterMatrix) {
-    let numberMatrix = [[], []]
+function letterMatrixTonumericMatrix(letterMatrix) {
+    let numericMatrix = [[], []]
 
     for (let i = 0; i < 2; i++)
         for (let j = 0; j < letterMatrix[0].length; j++)
-            numberMatrix[i][j] = alphabetMap.get(letterMatrix[i][j])
-    
-    return numberMatrix
+            numericMatrix[i][j] = alphabetMap.get(letterMatrix[i][j])
+
+    return numericMatrix
 }
 
-function encrypt(numberMatrix, keyMatrix) {
-    let cipherMatrix = math.multiply(numberMatrix, keyMatrix).toArray()
-    
-    for (let i = 0; i < cipherMatrix.length; i++)
-        for (let j = 0; j < cipherMatrix[0].length; j++)
-            cipherMatrix[i][j] = math.mod(cipherMatrix[i][j], 28)
-    return cipherMatrix
+function encrypt(numericMatrix, keyMatrix) {
+    keyMatrix = math.matrix(keyMatrix)
+    let encryptedMatrix = [[], []]
+
+    for (let col = 0; col < numericMatrix[0].length; col += 2) {
+        let block = [
+            [numericMatrix[0][col], numericMatrix[0][col + 1]],
+            [numericMatrix[1][col], numericMatrix[1][col + 1]]
+        ]
+
+        let encryptedBlock = math.multiply(keyMatrix, block).toArray()
+
+        for (let i = 0; i < 2; i++)
+            for (let j = 0; j < 2; j++)
+                encryptedBlock[i][j] = math.mod(encryptedBlock[i][j], 28);
+        
+        encryptedMatrix[0].push(...encryptedBlock[0]);
+        encryptedMatrix[1].push(...encryptedBlock[1]);
+    }
+    console.log(encryptedMatrix)
+    return encryptedMatrix
 }
 
 function fillMatrix(matrixEl, matrix) {
@@ -93,17 +115,38 @@ function completeKey(keyMatrixEl) {
     keyMatrixEl.children[3].value = d
 }
 
+function getKeyMatrix(keyMatrixEl) {
+    let matrix = [[], []]; // 2x2 matrix
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 2; j++) {
+            const index = i * 2 + j;
+            const element = parseFloat(keyMatrixEl.children[index].value);
+            matrix[i][j] = isNaN(element) ? 0 : element;
+        }
+    }
+    return matrix;
+}
+
 function fillInteractiveContent() {
     let plainText = plainTextInputEl.value
-    let charMatrix = textToLetterMatrix(plainText)
+    let textMatrix = textToLetterMatrix(plainText)
 
-    let numberMatrix = letterMatrixToNumberMatrix(charMatrix)
+    // second step
+    let numericMatrix = letterMatrixTonumericMatrix(textMatrix)
 
-    fillMatrix(charMatrix1El, charMatrix)
-    fillMatrix(numberMatrix1El, numberMatrix)
+    fillMatrix(textMatrix1El, textMatrix)
+    fillMatrix(numericMatrix1El, numericMatrix)
 
-    //second step
-    completeKey(keyMatrixEl)
+    // first step
+    completeKey(keyMatrix1El, numericMatrix)
+
+
+    // third step
+    let keyMatrix = getKeyMatrix(keyMatrix1El)
+    fillMatrix(numericMatrix2El, numericMatrix)
+    fillMatrix(keyMatrix2El, keyMatrix)
+    let numericEncryptedMatrix = encrypt(numericMatrix, keyMatrix)
+    fillMatrix(numericEncryptedMatrixEl, numericEncryptedMatrix)
 }
 
 fillInteractiveContent()
