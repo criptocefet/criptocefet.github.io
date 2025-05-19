@@ -5,6 +5,8 @@ const plainTextInputEl = document.getElementById('plainText')
 const keyMatrix1El = document.getElementById('key-matrix-1')
 const keyMatrix2El = document.getElementById('key-matrix-2')
 const numericEncryptedMatrixEl = document.getElementById('numeric-encrypted-1')
+const textEncryptedMatrix1El = document.getElementById('text-encrypted-1')
+const invKeyMatrixEl = document.getElementById('inv-key-matrix')
 
 const alphabetMap = new Map()
 // Letras de a a z
@@ -40,7 +42,7 @@ function textToLetterMatrix(text) {
     return textMatrix
 }
 
-function letterMatrixTonumericMatrix(letterMatrix) {
+function TextToNumericMatrix(letterMatrix) {
     let numericMatrix = [[], []]
 
     for (let i = 0; i < 2; i++)
@@ -50,9 +52,20 @@ function letterMatrixTonumericMatrix(letterMatrix) {
     return numericMatrix
 }
 
-function encrypt(numericMatrix, keyMatrix) {
+function numericToTextMatrix(numericMatrix) {
+    let letterMatrix = [[], []];
+
+    for (let i = 0; i < 2; i++)
+        for (let j = 0; j < numericMatrix[0].length; j++)
+            letterMatrix[i][j] = alphabetMap.get(numericMatrix[i][j]);
+
+    return letterMatrix;
+}
+
+
+function applyHillCipher(numericMatrix, keyMatrix) {
     keyMatrix = math.matrix(keyMatrix)
-    let encryptedMatrix = [[], []]
+    let outputMatrix = [[], []]
 
     for (let col = 0; col < numericMatrix[0].length; col += 2) {
         let block = [
@@ -60,17 +73,25 @@ function encrypt(numericMatrix, keyMatrix) {
             [numericMatrix[1][col], numericMatrix[1][col + 1]]
         ]
 
-        let encryptedBlock = math.multiply(keyMatrix, block).toArray()
+        let outputBlock = math.multiply(keyMatrix, block).toArray()
 
         for (let i = 0; i < 2; i++)
             for (let j = 0; j < 2; j++)
-                encryptedBlock[i][j] = math.mod(encryptedBlock[i][j], 28);
+                outputBlock[i][j] = math.mod(outputBlock[i][j], 28);
         
-        encryptedMatrix[0].push(...encryptedBlock[0]);
-        encryptedMatrix[1].push(...encryptedBlock[1]);
+        outputMatrix[0].push(...outputBlock[0]);
+        outputMatrix[1].push(...outputBlock[1]);
     }
-    console.log(encryptedMatrix)
-    return encryptedMatrix
+    console.log(outputMatrix)
+    return outputMatrix
+}
+
+function encrypt(message, keyMatrix) {
+    return applyHillCipher(message, keyMatrix)
+}
+
+function decrypt(message, inverseKeyMatrix) {
+  return applyHillCipher(message, inverseKeyMatrix);
 }
 
 function fillMatrix(matrixEl, matrix) {
@@ -127,26 +148,35 @@ function getKeyMatrix(keyMatrixEl) {
     return matrix;
 }
 
+function decrypt(numericMatrix, invKeyMatrix) {
+    
+}
+
 function fillInteractiveContent() {
     let plainText = plainTextInputEl.value
     let textMatrix = textToLetterMatrix(plainText)
 
-    // second step
-    let numericMatrix = letterMatrixTonumericMatrix(textMatrix)
+    // second step - ecrypting
+    let numericMatrix = TextToNumericMatrix(textMatrix)
 
     fillMatrix(textMatrix1El, textMatrix)
     fillMatrix(numericMatrix1El, numericMatrix)
 
-    // first step
+    // first step - ecrypting
     completeKey(keyMatrix1El, numericMatrix)
 
 
-    // third step
+    // third step - ecrypting
     let keyMatrix = getKeyMatrix(keyMatrix1El)
     fillMatrix(numericMatrix2El, numericMatrix)
     fillMatrix(keyMatrix2El, keyMatrix)
     let numericEncryptedMatrix = encrypt(numericMatrix, keyMatrix)
     fillMatrix(numericEncryptedMatrixEl, numericEncryptedMatrix)
-}
+    let textEncryptedMatrix = numericToTextMatrix(numericEncryptedMatrix)
+    fillMatrix(textEncryptedMatrix1El, textEncryptedMatrix)
 
+    //first step - decrypting
+    let invKeyMatrix = math.inv(keyMatrix)
+    fillMatrix(invKeyMatrixEl, invKeyMatrix)
+}
 fillInteractiveContent()

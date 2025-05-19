@@ -49,3 +49,8 @@ margin: 0;
     align-self: center;
     margin-top: 2vh;
 }
+
+.rel-sign {
+    margin-left: 1vw;
+    margin-right: 1vw;
+}

@@ -25,35 +25,33 @@
       de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.
     </p>
     <!--<p>
-      <p1>1º passo: </p1>Escolher a matriz chave 2x2: A matriz chave 2x2 é selecionada, sendo importante que seja invertível
+      <p class="p1">1º passo: </p>Escolher a matriz chave 2x2: A matriz chave 2x2 é selecionada, sendo importante que seja invertível
       (determinante diferente de zero).
     </p>
 
     <p>
-      <p1>2º passo: </p1>Converter a mensagem em números: A mensagem é convertida para números (A = 0, B = 1, ..., Z = 25). Se
+      <p class="p1">2º passo: </p>Converter a mensagem em números: A mensagem é convertida para números (A = 0, B = 1, ..., Z = 25). Se
       necessário, adiciona-se uma letra de preenchimento.
     </p>
 
     <p>
-      <p1>3º passo: </p1>Multiplicar a matriz chave pela mensagem: Cada par de números (bloco de 2 letras) é multiplicado pela
+      <p class="p1">3º passo: </p>Multiplicar a matriz chave pela mensagem: Cada par de números (bloco de 2 letras) é multiplicado pela
       matriz chave, resultando na mensagem cifrada (em números).
     </p>
 
     <p>
-      <p1>4º passo: </p1>Converter a mensagem cifrada em letras: Os números obtidos são convertidos de volta para letras,
+      <p class="p1">4º passo: </p>Converter a mensagem cifrada em letras: Os números obtidos são convertidos de volta para letras,
       formando a mensagem criptografada.
     </p>
 
     <p>
-      <p1>5º passo: </p1>Descriptografar a mensagem: O destinatário calcula a matriz chave inversa e a multiplica pela mensagem
+      <p class="p1">5º passo: </p>Descriptografar a mensagem: O destinatário calcula a matriz chave inversa e a multiplica pela mensagem
       cifrada, restaurando os números originais, que são então convertidos de volta em letras para recuperar a mensagem
       original.
     </p>-->
 
-    <p>
-      <p1>1º passo: Escolher a chave</p1>
-    </p>
-
+    <h3>Passo a passo para Criptografar 🔐​​</h3>
+    <p class="p1">1º passo: Escolher a chave</p>
     <div class="interactive-content container">
       <div class="matrix" id="key-matrix-1">
         <input class="cell l1" type="number" id="key-1-1" value="1">
@@ -64,28 +62,48 @@
     </div>
 
     <p>
-      <p1>2º passo: Converter a mensagem em números<br></p1>Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
-      Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas seja par.
+      <p class="p1">2º passo: Converter a mensagem em números</p><br>
+      Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
+      Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas
+      seja par.
     </p>
+
     <div class="interactive-content container">
       <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" value="abcd">
       <div class="rel">
         <div class="matrix" id="text-message-1"></div>
-        <p style="margin-left: 1vw; margin-right: 1vw;">➡️</p>
+        <p class="rel-sign">➡️</p>
         <div class="matrix" id="numeric-message-1"></div>
       </div>
     </div>
 
     <p>
-      <p1>3º passo: Criptografar a mensagem</p1><br>
-      Agora, multiplicaremos a mensagem pela matriz chave para criptografar.
+    <p class="p1">3º passo: Criptografar a mensagem</p><br>
+    Agora, multiplicaremos a mensagem pela matriz chave para criptografar. O resultado será uma nova matriz de números. <br><br>
+    Depois, vamos converter os números para letras, assim, será formada a mensagem cifrada.
+    </p>
+    <div class="interactive-content container">
+      <div class="rel">
+        <div class="matrix" id="numeric-message-2"></div>
+      <p class="rel-sign">x</p>
+      <div class="matrix" id="key-matrix-2"></div>
+      <p class="rel-sign">=</p>
+      <div class="matrix" id="numeric-encrypted-1"></div>
+      <p class="rel-sign">➡️</p>
+      <div class="matrix" id="text-encrypted-1"></div>
+      </div>
+      <div class="dropdown" id="dropdown-step-3">Processo detalhado ►</div>
+    </div>
+
+
+    <h3>Passo a passo para Decifrar 🔓</h3>
+    <p>
+      <p class="p2">1º Inverter a matriz chave:</p><br>
+      Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa. <br><br>
+      Para isso, vamos primeiro inverter a matriz chave:
     </p>
     <div class="interactive-content container rel">
-      <div class="matrix" id="numeric-message-2"></div>
-      <p style="margin-left: 1vw; margin-right: 1vw;">x</p>
-      <div class="matrix" id="key-matrix-2"></div>
-      <p style="margin-left: 1vw; margin-right: 1vw;">=</p>
-      <div class="matrix" id="numeric-encrypted-1"></div>
+      <div class="matrix" id="inv-key-matrix"></div>
     </div>
 
     <p>Conteúdos relacionados:</p>
@@ -96,4 +114,5 @@
 
   </main>
 </body>
+
 </html>
