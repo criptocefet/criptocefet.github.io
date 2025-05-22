@@ -1,4 +1,5 @@
 .matrix {
+    background-color: #c5c5ca;
     border-left: solid 3px rgba(255, 255, 255, 0.7);
     border-right: solid 3px rgba(255, 255, 255, 0.7);
     border-radius: 10px;
