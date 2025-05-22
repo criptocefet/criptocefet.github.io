@@ -1,45 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>CryptoCefet</title>
-    <link rel="stylesheet" href="/src/styles/geral.css"/>
-    <link rel="stylesheet" href="/src/styles/hill.css">
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js"></script>
-    <script defer src="/src/scripts/geral.js"></script>
-    <script defer src="/src/scripts/hill.js"></script>
-  </head>
 
-  <body>
-    <header>
-      <img id="logo" src="/src/imgs/logo.png" alt="Logo CryptoCefet"/>
-      <h1>CryptoCefet</h1>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryptoCefet</title>
+  <link rel="icon" href="/src/imgs/logo.png">
+  <link rel="stylesheet" href="/src/styles/geral.css" />
+  <link rel="stylesheet" href="/src/styles/hill.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js"></script>
+  <script defer src="/src/scripts/geral.js"></script>
+  <script defer src="/src/scripts/hill.js"></script>
+</head>
 
-    <main class="container">
-        <h2>Cifra de Hill</h2>
-        <p>A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de padrões mais difícil de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.</p>
-        
-        
-        <p><p1>1° passo: </p1>Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
-        A mensagem deve ser colocada em uma matriz com duas linhas.
-        </p>
-        <div class="interactive-content container">
-          <label>Mensagem:</label><input id="plainText" type="text" onformchange="fillInteractiveContent()">
-          <div style="display: flex; flex-direction: row; justify-content: center; flex-wrap: nowrap; align-self: center; margin-top: 2vh;">
-            <div class="matrix" id="mc1"></div>
-            <p style="margin-left: 1vw; margin-right: 1vw;">➡️</p>
-            <div class="matrix" id="mn1"></div>
-          </div>
-        </div>
+<body>
+  <header>
+    <img id="logo" src="/src/imgs/logo.png" alt="Logo CryptoCefet" />
+    <h1>CryptoCefet</h1>
+  </header>
 
-        <p>Conteúdos relacionados:</p>
-        <ul>
-          <li>Matrizes</li>
-          <li>Aritmética modular</li>
-        </ul>
+  <main class="container">
+    <h2>Cifra de Hill</h2>
+    <p>A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de padrões mais difícil
+      de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.
+    </p>
 
-    </main>
-  </body>
+    <h3>Passo a passo para Criptografar 🔐​​</h3>
+    <p class="p1">1º passo: Escolher a chave</p>
+    <div class="interactive-content container rel">
+      <div class="matrix" id="key-matrix-1">
+        <input class="cell l1" type="number" id="key-1-1" >
+        <input class="cell l1" type="number" id="key-1-2" >
+        <input class="cell" type="number" id="key-2-1" >
+        <input class="cell" type="number" id="key-2-2" disabled>
+      </div>
+    </div>
+
+    <p>
+      <p class="p1">2º passo: Converter a mensagem em números</p><br>
+      Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
+      Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas
+      seja par.
+    </p>
+
+    <div class="interactive-content container">
+      <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui">
+      <div class="rel">
+        <div class="matrix" id="text-message-1"></div>
+        <p class="rel-sign">➡️</p>
+        <div class="matrix" id="numeric-message-1"></div>
+      </div>
+    </div>
+
+    <p>
+    <p class="p1">3º passo: Criptografar a mensagem</p><br>
+    Agora, multiplicaremos a mensagem pela matriz chave para criptografar. O resultado será uma nova matriz de números. <br><br>
+    Depois, vamos converter os números para letras, assim, será formada a mensagem cifrada.
+    </p>
+    <div class="interactive-content container">
+      <div class="rel">
+        <div class="matrix" id="numeric-message-2"></div>
+      <p class="rel-sign">x</p>
+      <div class="matrix" id="key-matrix-2"></div>
+      <p class="rel-sign">=</p>
+      <div class="matrix" id="numeric-encrypted-1"></div>
+      <p class="rel-sign">➡️</p>
+      <div class="matrix" id="text-encrypted-1"></div>
+      </div>
+      <!--<div class="dropdown" id="dropdown-step-3">Processo detalhado ►</div>-->
+    </div>
+
+
+    <h3>Passo a passo para Decifrar 🔓</h3>
+    <p>
+      <p class="p2">1º passo: Inverter a matriz chave</p><br>
+      Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa. <br><br>
+      Para isso, vamos primeiro inverter a matriz chave:
+    </p>
+    <div class="interactive-content container rel">
+      <div class="matrix" id="inv-key-matrix-1"></div>
+    </div>
+
+    <p>
+      <p class="p2">2º passo: Decifrar a mensagem</p><br>
+      Agora, multiplicaremos a mensagem cifrada pela inversa da matriz chave. <br><br>
+      O resultado será a mensagem original.
+    </p>
+    <div class="interactive-content container rel">
+      <div class="matrix" id="inv-key-matrix-2"></div>
+      <p class="rel-sign">x</p>
+      <div class="matrix" id="numeric-encrypted-2"></div>
+      <p class="rel-sign">=</p>
+      <div class="matrix" id="numeric-message-3"></div>
+      <p class="rel-sign">➡️</p>
+      <div class="matrix" id="text-message-2"></div>
+    </div>
+
+    <p>Conteúdos relacionados:</p>
+    <ul>
+      <li>Matrizes</li>
+      <li>Aritmética modular</li>
+    </ul>
+
+  </main>
+</body>
+
 </html>
