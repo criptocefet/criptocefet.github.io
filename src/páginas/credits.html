@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CriptoCefet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/hill.css">
+    <link rel="stylesheet" href="/src/styles/styles.css">
+</head>
+
+<body>
+    <header></header>
+    <script src="/src/components/importHeader.js"></script>
+
+    <main class="container" id="m">
+        <h2>Créditos</h2>
+        <p id="description">
+            Uicons by <a style="color: black;" href="https://www.flaticon.com/uicons">Flaticon</a>
+        </p>
+    </main>
+
+    <script>
+        const containers = document.querySelectorAll(".container");
+
+        let tema = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? "tema-escuro"
+            : "tema-claro";
+
+        containers.forEach(container => {
+            container.classList.add(tema);
+        });
+    </script>
+</body>
+
+</html>

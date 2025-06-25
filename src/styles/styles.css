@@ -1,3 +1,19 @@
+/* Ícones */
+@import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css');
+
+i {
+    font-size: 2em;
+}
+
+.icon-square {
+    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+  }
+
 /* Temas */
 .tema-escur {
     color: rgb(200, 200, 200);
@@ -160,6 +176,7 @@ ul {
 #guide-container-1 {
     padding-left: 2vw;
     border-left: solid 2px var(--azul);
+    margin-bottom: 5vh;
 }
 
 #guide-container-2 {
@@ -207,8 +224,32 @@ ul {
     color: #ffffff;
 }
 
-.dropdown {
-    margin: 2vh 0vw 1vh 1vw;
+.dropdown-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding-left: 0%;
+    align-items: center;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.dropdown-btn > i {
+    transition: transform 0.3s ease;
+}
+
+.flipped {
+    transform: rotate(90deg);
+}
+
+.dropdown-content {
+    display: none;
+}
+
+.hidden {
+    display: none;
 }
 
 .matrix {

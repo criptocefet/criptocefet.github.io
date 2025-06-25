@@ -23,81 +23,86 @@
 
   <main class="container">
     <h2>Cifra de Hill</h2>
-    <p id="description">A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de padrões mais difícil
+    <p id="description">A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de
+      padrões mais difícil
       de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.
     </p>
 
-    <h3 id="guide-title-1">Como Cifrar 🔐​​</h3>
+    <div id="guide-container-1">
+      <h3 id="guide-title-1">Como Cifrar 🔐​​</h3>
 
-    <p class="step-name-1">1º passo: Escolher a chave</p>
-    <div class="interactive-content container rel">
-      <div class="matrix" id="key-matrix-1">
-        <input class="cell l1" type="number" id="key-1-1">
-        <input class="cell l1" type="number" id="key-1-2">
-        <input class="cell" type="number" id="key-2-1">
-        <input class="cell" type="number" id="key-2-2" disabled>
+      <p class="step-name-1">1º passo: Escolher a chave</p>
+      <div class="interactive-content container rel">
+        <div class="matrix" id="key-matrix-1">
+          <input class="cell l1" type="number" id="key-1-1">
+          <input class="cell l1" type="number" id="key-1-2">
+          <input class="cell" type="number" id="key-2-1">
+          <input class="cell" type="number" id="key-2-2" disabled>
+        </div>
+      </div>
+
+      <p>
+      <p class="step-name-1">2º passo: Converter a mensagem em números</p><br>
+      Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
+      Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas
+      seja par.
+      </p>
+
+      <div class="interactive-content container">
+        <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" maxlength="6">
+        <div class="rel">
+          <div class="matrix" id="text-message-1"></div>
+          <p class="rel-sign">➡️</p>
+          <div class="matrix" id="numeric-message-1"></div>
+        </div>
+      </div>
+
+      <p>
+      <p class="step-name-1">3º passo: Criptografar a mensagem</p><br>
+      Agora, multiplicaremos a mensagem pela matriz chave para criptografar. O resultado será uma nova matriz de
+      números.
+      <br><br>
+      Depois, vamos converter os números para letras, assim, será formada a mensagem cifrada.
+      </p>
+      <div class="interactive-content container">
+        <div class="rel">
+          <div class="matrix" id="key-matrix-2"></div>
+          <p class="rel-sign">x</p>
+          <div class="matrix" id="numeric-message-2"></div>
+          <p class="rel-sign">=</p>
+          <div class="matrix" id="numeric-encrypted-1"></div>
+          <p class="rel-sign">➡️</p>
+          <div class="matrix" id="text-encrypted-1"></div>
+        </div>
+        <!--<div class="dropdown" id="dropdown-step-3">Processo detalhado ►</div>-->
       </div>
     </div>
 
-    <p>
-    <p class="step-name-1">2º passo: Converter a mensagem em números</p><br>
-    Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
-    Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas
-    seja par.
-    </p>
-
-    <div class="interactive-content container">
-      <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" maxlength="6">
-      <div class="rel">
-        <div class="matrix" id="text-message-1"></div>
-        <p class="rel-sign">➡️</p>
-        <div class="matrix" id="numeric-message-1"></div>
+    <div id="guide-container-2">
+      <h3 id="guide-title-2">Passo a passo para Decifrar 🔓</h3>
+      <p>
+      <p class="step-name-2">1º passo: Inverter a matriz chave</p><br>
+      Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa. <br><br>
+      Para isso, vamos primeiro inverter a matriz chave:
+      </p>
+      <div class="interactive-content container rel">
+        <div class="matrix" id="inv-key-matrix-1"></div>
       </div>
-    </div>
 
-    <p>
-    <p class="step-name-1">3º passo: Criptografar a mensagem</p><br>
-    Agora, multiplicaremos a mensagem pela matriz chave para criptografar. O resultado será uma nova matriz de números.
-    <br><br>
-    Depois, vamos converter os números para letras, assim, será formada a mensagem cifrada.
-    </p>
-    <div class="interactive-content container">
-      <div class="rel">
-        <div class="matrix" id="key-matrix-2"></div>
+      <p>
+      <p class="step-name-2">2º passo: Decifrar a mensagem</p><br>
+      Agora, multiplicaremos a mensagem cifrada pela inversa da matriz chave. <br><br>
+      O resultado será a mensagem original.
+      </p>
+      <div class="interactive-content container rel">
+        <div class="matrix" id="inv-key-matrix-2"></div>
         <p class="rel-sign">x</p>
-        <div class="matrix" id="numeric-message-2"></div>
+        <div class="matrix" id="numeric-encrypted-2"></div>
         <p class="rel-sign">=</p>
-        <div class="matrix" id="numeric-encrypted-1"></div>
+        <div class="matrix" id="numeric-message-3"></div>
         <p class="rel-sign">➡️</p>
-        <div class="matrix" id="text-encrypted-1"></div>
+        <div class="matrix" id="text-message-2"></div>
       </div>
-      <!--<div class="dropdown" id="dropdown-step-3">Processo detalhado ►</div>-->
-    </div>
-
-
-    <h3 id="guide-title-2">Passo a passo para Decifrar 🔓</h3>
-    <p>
-    <p class="step-name-2">1º passo: Inverter a matriz chave</p><br>
-    Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa. <br><br>
-    Para isso, vamos primeiro inverter a matriz chave:
-    </p>
-    <div class="interactive-content container rel">
-      <div class="matrix" id="inv-key-matrix-1"></div>
-    </div>
-
-    <p>
-    <p class="step-name-2">2º passo: Decifrar a mensagem</p><br>
-    Agora, multiplicaremos a mensagem cifrada pela inversa da matriz chave. <br><br>
-    O resultado será a mensagem original.
-    </p>
-    <div class="interactive-content container rel">
-      <div class="matrix" id="inv-key-matrix-2"></div>
-      <p class="rel-sign">x</p>
-      <div class="matrix" id="numeric-encrypted-2"></div>
-      <p class="rel-sign">=</p>
-      <div class="matrix" id="numeric-message-3"></div>
-      <p class="rel-sign">➡️</p>
-      <div class="matrix" id="text-message-2"></div>
     </div>
 
     <p>Conteúdos relacionados:</p>

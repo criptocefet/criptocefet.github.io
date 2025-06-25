@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CriptoCefet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/src/styles/hill.css">
+    <link rel="stylesheet" href="/src/styles/styles.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css">
+</head>
+
+<body>
+    <header></header>
+    <script src="/src/components/importHeader.js"></script>
+
+    <main class="container" id="m">
+        <h2>Testar números primos</h2>
+        <p id="description">
+            Números primos são números que são divisíveis apenas por 1 e por eles mesmos. Em outras palavras, um número
+            é primo se não pode ser dividido por nenhum número além de 1 e ele mesmo. Este guia irá te ensinar a testar
+            se um número é primo ou não.
+        </p>
+
+        <p class="step-name-1">1º passo: Título do passo</p><br>
+        Descrição do passo: Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br>
+        Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de
+        colunas
+        seja par.
+        </p>
+
+        <div class="interactive-content container">
+            <label>Input:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" value="abcd">
+            <button class="dropdown-btn">Por que até a raiz? <i class="fi fi-rs-angle-small-right icon-square"></i></button>
+            <div class="dropdown-content">
+                <p>Um número é primo se tiver exatamente dois divisores: 1 e ele mesmo.</p>
+            </div>
+        </div>
+        </div>
+
+        <div id="guide-container-2">
+            <h3 id="guide-title-2">Como decifrar🔐​​</h3>
+
+            <p>
+            <p class="step-name-2">1º passo: Título do passo</p><br>
+            Descrição do passo: Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br>
+            Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de
+            colunas
+            seja par.
+            </p>
+            <div class="interactive-content container">
+                <div class="rel">
+                    <div class="matrix" id="numeric-message-1">
+                        <input class="cell" type="number" value="0" disabled style="grid-row: 1;">
+                        <input class="cell" type="number" value="11" disabled style="grid-row: 1;">
+                        <input class="cell" type="number" value="24" disabled style="grid-row: 2;">
+                        <input class="cell" type="number" value="-3" disabled style="grid-row: 2;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>Conteúdos relacionados:</p>
+        <ul>
+            <li>Matrizes</li>
+            <li>Aritmética modular</li>
+        </ul>
+    </main>
+
+    <script src="/src/scripts/geral.js"></script>
+</body>
+
+</html>
