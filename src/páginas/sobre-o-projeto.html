@@ -19,18 +19,28 @@
     <script src="/src/components/importHeader.js"></script>
 
     <main class="container" id="m">
-        <h2>Nome do tópico</h2>
+        <h2>O que é o Criptocefet?</h2>
         <p id="description">
-            Este texto é uma descrição breve do tópico. Este texto é uma descrição breve do tópico. Este texto é uma
-            descrição breve do tópico.
-            Este texto é uma descrição breve do tópico. Este texto é uma descrição breve do tópico. Este texto é uma
-            descrição breve do tópico.
+            O CriptoCefet é um projeto de extensão voltado para criar uma plataforma de estudos com conteúdo interativo e dinâmico sobre Criptografia e Matemática.
         </p>
 
-        <p>Conteúdos relacionados:</p>
+        <p>Atribuições:</p>
         <ul>
+            <li>Uicons do <a href="https://www.flaticon.com/uicons">Flaticon</a></li>
         </ul>
     </main>
+
+    <script>
+        const containers = document.querySelectorAll(".container");
+
+        let tema = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? "tema-escuro"
+            : "tema-claro";
+
+        containers.forEach(container => {
+            container.classList.add(tema);
+        });
+    </script>
 </body>
 
 </html>

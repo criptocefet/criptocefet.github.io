@@ -12,7 +12,9 @@
         rel="stylesheet">
     <link rel="stylesheet" href="/src/styles/hill.css">
     <link rel="stylesheet" href="/src/styles/styles.css">
-    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css">
+    <link rel="stylesheet"
+        href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -22,53 +24,47 @@
     <main class="container" id="m">
         <h2>Testar números primos</h2>
         <p id="description">
-            Números primos são números que são divisíveis apenas por 1 e por eles mesmos. Em outras palavras, um número
-            é primo se não pode ser dividido por nenhum número além de 1 e ele mesmo. Este guia irá te ensinar a testar
+            Números primos são números que são divisíveis apenas por 1 e por eles mesmos. Então, para testar se um
+            número é primo, é necessário verificar se algum outro número divide ele exatamente. Este guia irá te ensinar
+            a testar
             se um número é primo ou não.
         </p>
 
-        <p class="step-name-1">1º passo: Título do passo</p><br>
-        Descrição do passo: Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br>
-        Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de
-        colunas
-        seja par.
-        </p>
+        <p>Primeiro, escolha um número <var>n</var> que quer testar se é primo ou não.</p>
 
         <div class="interactive-content container">
-            <label>Input:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" value="abcd">
-            <button class="dropdown-btn">Por que até a raiz? <i class="fi fi-rs-angle-small-right icon-square"></i></button>
-            <div class="dropdown-content">
-                <p>Um número é primo se tiver exatamente dois divisores: 1 e ele mesmo.</p>
-            </div>
-        </div>
+            Número <var>n</var> a ser testado:<input type="number" id="num" placeholder="Insira um número">
         </div>
 
-        <div id="guide-container-2">
-            <h3 id="guide-title-2">Como decifrar🔐​​</h3>
+        <p>Agora, vamos fazer os testes de divisibilidade. Mas não é necessário testar todos os números menores que ele.
+            Vamos testar apenas os números primos menores que <var>√n</var>.</p>
 
-            <p>
-            <p class="step-name-2">1º passo: Título do passo</p><br>
-            Descrição do passo: Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br>
-            Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de
-            colunas
-            seja par.
-            </p>
-            <div class="interactive-content container">
-                <div class="rel">
-                    <div class="matrix" id="numeric-message-1">
-                        <input class="cell" type="number" value="0" disabled style="grid-row: 1;">
-                        <input class="cell" type="number" value="11" disabled style="grid-row: 1;">
-                        <input class="cell" type="number" value="24" disabled style="grid-row: 2;">
-                        <input class="cell" type="number" value="-3" disabled style="grid-row: 2;">
-                    </div>
-                </div>
-            </div>
+        <button class="dropdown-btn">Por que só até a raiz? <i
+                class="fi fi-rs-angle-small-right icon-square"></i></button>
+        <div class="dropdown-content">
+            Pense no número <var>n</var> como o produto de dois números, <var>a</var> e <var>b</var>. <br>
+            <p class="align-center">\( n = a \times b \)</p>
+            Considerando que <var>a</var> e <var>b</var> são diferentes de √<var>n</var>, então se um deles for maior que √<var>n</var>, o outro deve ser menor que √<var>n</var>. <br>
+            Exe
+            Por isso, não é necessário testar valores maiores que √<var>n</var>.
+        </div>
+
+        <button class="dropdown-btn">Por que só divisores primos? <i
+                class="fi fi-rs-angle-small-right icon-square"></i></button>
+        <div class="dropdown-content">
+            Se um número não divide n exatamente, então nenhum múltiplo vai dividir. Por isso, ao testar se um número é
+            primo, não precisamos testar divisibilidade com números compostos (números que tem outros divisores além de
+            1 e ele mesmo), pois eles podem ser decompostos em fatores primos. Por exemplo: <br>
+            <p class="align-center">\( 25 \div 2 = 11 \text{ com resto } 1 \implies 23 \text{ não é divisível por } 2 \)</p>
+            Como 2 não divide 23, então nenhum múltiplo de 2 dividirá 23 sem resto. Por isso, não é preciso testar números compostos, assim economizamos esforço sem esquecer de nenhum divisor.
+            <br> <br>
         </div>
 
         <p>Conteúdos relacionados:</p>
         <ul>
-            <li>Matrizes</li>
-            <li>Aritmética modular</li>
+            <li>Números primos</li>
+            <li>Testar números coprimos</li>
+            <li><a href="rsa.html">Criptografia RSA</a></li>
         </ul>
     </main>
 

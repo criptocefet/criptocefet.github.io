@@ -10,26 +10,29 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
     rel="stylesheet">
-  <link rel="icon" href="/src/imgs/logo.png">
-  <link rel="stylesheet" href="/src/styles/styles.css" />
+  <link rel="icon" href="../imgs/logo.png">
+  <link rel="stylesheet" href="../styles/styles.css" />
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js"></script>
-  <script defer src="/src/scripts/geral.js"></script>
-  <script defer src="/src/scripts/hill.js"></script>
+  <script defer src="../scripts/geral.js"></script>
+  <script defer src="../scripts/hill.js"></script>
 </head>
 
 <body>
   <header></header>
-  <script src="/src/components/importHeader.js"></script>
+  <script src="../components/importHeader.js"></script>
 
   <main class="container">
     <h2>Cifra de Hill</h2>
-    <p id="description">A cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de
+    <p id="description">A Cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de
       padrões mais difícil
-      de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras.
+      de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras. Veja mais sobre a história da Cifra de Hill <a href="">aqui</a>.
+      <br>
+      A mensagem é convertida em números e dividida em blocos de tamanho igual à ordem da matriz chave. Cada bloco é então organizado em uma matriz (vetor coluna). Essa matriz de bloco é multiplicada pela matriz chave, resultando em uma matriz criptografada para aquele bloco.
+      A matriz criptografada de cada bloco pode ser revertida para o bloco original ao ser multiplicada pela matriz inversa da chave.
     </p>
 
     <div id="guide-container-1">
-      <h3 id="guide-title-1">Como Cifrar 🔐​​</h3>
+      <h3 id="guide-title-1">Como Cifrar <i class="fi fi-rs-lock"></i>​​</h3>
 
       <p class="step-name-1">1º passo: Escolher a chave</p>
       <div class="interactive-content container rel">
@@ -43,7 +46,22 @@
 
       <p>
       <p class="step-name-1">2º passo: Converter a mensagem em números</p><br>
-      Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar.<br><br>
+      Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar. As letras da mensagem devem ser convertidas em números, assim permitindo operações. A tabela abaixo mostra como a conversão será feita.
+      </p>
+      <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+          <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td>
+          <td>K</td><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td>
+          <td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td> </td><td>.</td>
+        </tr>
+        <tr>
+          <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+          <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
+          <td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
+        </tr>
+      </table>
+
+      <p>
       Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas
       seja par.
       </p>
@@ -54,6 +72,10 @@
           <div class="matrix" id="text-message-1"></div>
           <p class="rel-sign">➡️</p>
           <div class="matrix" id="numeric-message-1"></div>
+        </div>
+        <button class="dropdown-btn">Quais são as regras para a chave? <i class="fi fi-rs-angle-small-right icon-square"></i></button>
+        <div class="dropdown-content">
+            <p></p>
         </div>
       </div>
 
@@ -79,7 +101,7 @@
     </div>
 
     <div id="guide-container-2">
-      <h3 id="guide-title-2">Passo a passo para Decifrar 🔓</h3>
+      <h3 id="guide-title-2">Passo a passo para Decifrar <i class="fi fi-rs-unlock"></i></h3>
       <p>
       <p class="step-name-2">1º passo: Inverter a matriz chave</p><br>
       Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa. <br><br>

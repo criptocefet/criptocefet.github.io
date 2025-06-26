@@ -1,7 +1,7 @@
 /* Ícones */
 @import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css');
 
-i {
+button > i {
     font-size: 2em;
 }
 
@@ -58,6 +58,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Inter', sans-serif;
+    text-align: justify;
 }
 
 header {
@@ -152,9 +153,14 @@ h3 {
     font-size: 1.5em;
 }
 
-a {
+nav a {
     text-decoration: none;
     color: var(--branco);
+}
+
+a {
+    color: var(--azul-claro);
+    text-decoration: none;
 }
 
 input {
@@ -189,7 +195,7 @@ ul {
     height: 30px;
     line-height: 30px;
     width: fit-content;
-    padding: 0 5px;
+    padding: 2px 5px;
     color: var(--azul);
     border: solid 2px var(--azul);
     border-radius: 8px;
@@ -200,7 +206,7 @@ ul {
     height: 30px;
     line-height: 30px;
     width: fit-content;
-    padding: 0 5px;
+    padding: 2px 5px;
     color: var(--ciano);
     border: solid 2px var(--ciano);
     border-radius: 8px;
@@ -234,6 +240,9 @@ ul {
     align-items: center;
     font-family: inherit;
     font-size: inherit;
+    padding-left: 2vw;
+    border-left: solid 2px var(--cinza);
+    margin-top: 1vh;
 }
 
 .dropdown-btn > i {
@@ -246,6 +255,9 @@ ul {
 
 .dropdown-content {
     display: none;
+    padding-left: 2vw;
+    border-left: solid 2px var(--cinza);
+    margin-bottom: 1vh;
 }
 
 .hidden {
@@ -312,6 +324,14 @@ input::-webkit-inner-spin-button {
 
 ul {
     margin-bottom: 1vh;
+}
+
+var {
+    font-weight: bold;
+}
+
+.align-center {
+    text-align: center;
 }
 
 @media (max-width: calc(944px + 8vw)) {
