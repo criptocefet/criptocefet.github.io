@@ -465,6 +465,16 @@ input:checked+.slider::before {
 }
 
 /* Card */
+/* Container de cartões */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-self: center;
+    margin-top: 2vh;
+}
+
 .card {
   display: block;
   width: 200px;
@@ -534,5 +544,20 @@ input:checked+.slider::before {
 
     nav {
         width: calc(92% - 1px);
+    }
+
+    .card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-self: center;
+    margin-top: 2vh;
+    }
+
+    .card {
+        width: calc(92% - 1px);
+        max-width: 300px;
+        margin: 10px auto;
     }
 }
