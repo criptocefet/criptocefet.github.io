@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CriptoCefet</title>
+    <link rel="icon" href="../imgs/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet"
+        href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        input[type="number"], input[type="text"] {
+  border: 2px solid var(--azul);
+  border-radius: 6px;
+  padding: 0.5em;
+  transition: 0.3s;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #1e90ff;
+}
+    </style>
+</head>
+
+<body>
+    <header></header>
+    <script src="/src/components/importHeader.js"></script>
+
+    <main class="container">
+        <h2 id="main-title">Testar números primos</h2>
+        <p id="description">
+            Números primos são números que são divisíveis apenas por 1 e por eles mesmos. Então, para testar se um
+            número é primo, é necessário verificar se algum outro número divide ele exatamente. Este guia irá te ensinar
+            a testar
+            se um número é primo ou não.
+        </p>
+
+        <p>Primeiro, escolha um número \(n\) que quer testar se é primo ou não.</p>
+
+        <div class="interactive-content container">
+            Número \(n\) a ser testado:<input type="number" id="n" placeholder="Insira um número">
+        </div>
+
+        <p>Agora, vamos fazer os testes de divisibilidade. Mas não é necessário testar todos os números menores que ele.
+            Vamos testar apenas os números primos menores que \(\sqrt{n}\).</p>
+
+        <button class="gray-scope-line dropdown-btn">Por que só até a raiz? <i
+                class="fi fi-rs-angle-small-right icon-square"></i></button>
+        <div class="gray-scope-line dropdown-content">
+            Pense no número \(n\) como o produto de dois números, \(a\) e \(b\). <br>
+            <p class="align-center">\( n = a \times b \)</p>
+            Considerando que \(a\) e \(b\) são diferentes de \(\sqrt{n}\), então se um deles for maior
+            que \(\sqrt{n}\), o outro deve ser menor que \(\sqrt{n}\). <br>
+            Por isso, não é necessário testar valores maiores que \(\sqrt{n}\).
+        </div>
+
+        <button class="gray-scope-line dropdown-btn">Por que só divisores primos? <i
+                class="fi fi-rs-angle-small-right icon-square"></i></button>
+        <div class="gray-scope-line dropdown-content">
+            Se um número não divide n exatamente, então nenhum múltiplo vai dividir. Por isso, ao testar se um número é
+            primo, não precisamos testar divisibilidade com números compostos (números que tem outros divisores além de
+            1 e ele mesmo), pois eles podem ser decompostos em fatores primos. Por exemplo: <br>
+            <p class="align-center">\( 25 \div 2 = 11 \text{ com resto } 1 \implies 23 \text{ não é divisível por } 2 \)
+            </p>
+            Como 2 não divide 23, então nenhum múltiplo de 2 dividirá 23 sem resto. Por isso, não é preciso testar
+            números compostos, assim economizamos esforço sem esquecer de nenhum divisor.
+        </div>
+
+        <div class="interactive-content">
+            Lista de divisores que vamos testar:
+            <p class="align-center" id="prime-list"></p>
+
+            <div id="operations"></div>
+        </div>
+
+        <button class="gray-scope-line dropdown-btn">Como encontrar os primos até \(\sqrt{n}\)? <i class="fi fi-rs-angle-small-right icon-square"></i></button>
+        <div class="gray-scope-line dropdown-content">
+            Para encontrar todos os números primos até um número \(n\), podemos usar o método chamado Crivo de Erastóstenes.
+        </div>
+
+        <p id="related-content">Conteúdos relacionados:</p>
+        <ul>
+            <li>Números primos</li>
+            <li>Testar números coprimos</li>
+            <li><a href="rsa.html">Criptografia RSA</a></li>
+        </ul>
+    </main>
+
+    <script src="../scripts/geral.js"></script>
+    <script src="../scripts/testar-primos.js"></script>
+</body>
+
+</html>

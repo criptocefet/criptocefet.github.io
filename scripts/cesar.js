@@ -1,89 +1,98 @@
-const plainTextCEl = document.getElementById("plainTextC")
-const cipherTextCEl = document.getElementById("cipherTextC")
-const keyCEl = document.getElementById("keyC")
-const decryptModeCEl = document.getElementById("decryptModeC")
-const staticCells = document.querySelectorAll(".staticCell")
-const cells = document.querySelectorAll(".cell")
-const infoBtnEl = document.getElementById("info")
-const floatingNotes = document.querySelectorAll(".note")
-const notes = document.querySelectorAll(".nota")
-const keyDisplayEl = document.getElementById("chave")
+const chaveEl = document.getElementById('chave')
+const alfabetoEl = document.getElementById('alfabeto')
+const alfabetoCifradoEl = document.getElementById('alfabeto-cifrado')
+const inputs = document.querySelectorAll('input')
+const modoEl = document.getElementById('modo')
+const mensagemEl = document.getElementById('mensagem')
+const textoCifradoEl = document.getElementById('texto-cifrado')
 
-function altC() {
-    if (plainTextCEl.disabled) {
-        plainTextCEl.disabled = false
-        cipherTextCEl.disabled = true
-        //cipherTextCEl.value = ""
-    } else {
-        plainTextCEl.disabled = true
-        //value = ""
-        cipherTextCEl.disabled = false
-    }
-    //executeC()
-}   // caso eu não use o botão e recalcule a caixa de texto, eu preciso executar a função para que a caixa de texto contenha o resultado. E isso é mais custoso do que simplesmente não apagar a caixa como eu fiz no caso do botão. Mas, pela versatilidade de poder mudar entre as duas formas, estou mantendo a versão que recalcula como comentário.
+function preencherConjuntoLetras(elementoEl, primeiraLetra) {
+  elementoEl.innerHTML = ''
 
-function encryptC(key, plainText) {
-    if (key == 0 || isNaN(key)) return plainText
-    let encryptedText = ""
-    for(let i = 0; i < plainText.length; i++) {
-        let c = plainText[i]
-        if (c >= 'a' && c <= 'z') {
-            c = String.fromCharCode((c.charCodeAt(0) - 97 + key) % 26 + 97)
-        } else if (c >= 'A' && c <= 'Z') {
-            c = String.fromCharCode((c.charCodeAt(0) - 65 + key) % 26 + 65)
-        }
-        encryptedText += c
-    }
-    return encryptedText //Texto agora cifrado
+  let c = primeiraLetra.charCodeAt(0)
+
+  for (let i = 0; i < 26; i++) {
+    let cell = document.createElement('input')
+    cell.type = 'text'
+    cell.disabled = true
+    cell.classList.add('cell')
+    cell.value = String.fromCharCode((c + i - 65) % 26 + 65)
+    elementoEl.appendChild(cell)
+  }
 }
 
-function decryptC(key, cipherText) {
-    if (key == 0 || isNaN(key)) return cipherText
-    let decryptedText = ""
-    for(let i = 0; i < cipherText.length; i++) {
-        let c = cipherText[i]
-        if (c >= 'a' && c <= 'z') {
-            c = String.fromCharCode((c.charCodeAt(0) - 97 - key + 26) % 26 + 97)
-        } else if (c >= 'A' && c <= 'Z') {
-            c = String.fromCharCode((c.charCodeAt(0) - 65 - key + 26) % 26 + 65)
-        }
-        decryptedText += c
+function encrypt(key, textoOriginal) {
+  if (key == 0 || isNaN(key)) return textoOriginal
+  let textoCifrado = ""
+  for (let i = 0; i < textoOriginal.length; i++) {
+    let c = textoOriginal[i]
+    if (c >= 'a' && c <= 'z') {
+      c = String.fromCharCode((c.charCodeAt(0) - 97 + key) % 26 + 97)
+    } else if (c >= 'A' && c <= 'Z') {
+      c = String.fromCharCode((c.charCodeAt(0) - 65 + key) % 26 + 65)
     }
-    return decryptedText //Texto agora decodificado
+    textoCifrado += c
+  }
+  return textoCifrado
 }
 
-function executeC() {
-    let key = parseInt(keyCEl.value)
-    if (decryptModeCEl.checked) plainTextCEl.value =
-    decryptC(key, cipherTextCEl.value);
-    else cipherTextCEl.value =
-    encryptC(key, plainTextCEl.value);
+function decryptC(key, textoCifrado) {
+  if (key == 0 || isNaN(key)) return textoCifrado
+  let textoDecodificado = ""
+  for (let i = 0; i < textoCifrado.length; i++) {
+    let c = textoCifrado[i]
+    if (c >= 'a' && c <= 'z') {
+      c = String.fromCharCode((c.charCodeAt(0) - 97 - key + 26) % 26 + 97)
+    } else if (c >= 'A' && c <= 'Z') {
+      c = String.fromCharCode((c.charCodeAt(0) - 65 - key + 26) % 26 + 65)
+    }
+    textoDecodificado += c
+  }
+  return textoDecodificado
 }
 
-function fillCells() {
-    let c = "A".charCodeAt(0)
-    for (let i = 0; i < 26; i++) {
-        staticCells[i].value = String.fromCharCode(c + i)
-    }
-} fillCells();
+function trocarModo() {
+  if (modoEl.checked) {
+    // Modo: Decifrar
+    mensagemEl.disabled = true;
+    mensagemEl.placeholder = 'Texto decodificado';
+    
+    textoCifradoEl.disabled = false;
+    textoCifradoEl.placeholder = 'Digite aqui o texto cifrado';
+  } else {
+    // Modo: Cifrar
+    mensagemEl.disabled = false;
+    mensagemEl.placeholder = 'Digite sua mensagem';
 
-function updateCells() {
-    let key = parseInt(keyCEl.value) || 0
-    let startCharCode = "A".charCodeAt(0)
-    for (let i = 0; i < 26; i++) {
-        let newCharCode = (startCharCode - 65 + i + key) % 26 + 65
-        cells[i].value = String.fromCharCode(newCharCode);
-    }
-    keyDisplayEl.value = key
-} updateCells();
-
-function toggleInfo() {
-    infoBtnEl.classList.toggle("deactivated")
-    infoBtnEl.classList.toggle("activated")
-    floatingNotes.forEach((note, index) => {
-        note.classList.toggle("hidden")
-    });
-    notes.forEach((note, index) => {
-        note.classList.toggle("hidden")
-    });
+    textoCifradoEl.disabled = true;
+    textoCifradoEl.placeholder = 'Texto cifrado';
+  }
 }
+
+function atualizarConteudoInterativo() {
+  if (chaveEl.value != '') chaveEl.nextElementSibling.classList.add('show')
+  if (chaveEl.value === '') chaveEl.nextElementSibling.classList.remove('show')
+
+  let chave = chaveEl.value
+
+  let c = encrypt(chave, 'A') // c é a primeira letra do alfabeto cifrado
+
+  preencherConjuntoLetras(alfabetoCifradoEl, c)
+
+  if (modoEl.checked)
+      mensagemEl.value = decryptC(chave, textoCifradoEl.value)
+  else 
+      textoCifradoEl.value = encrypt(chave, mensagemEl.value)
+}
+
+modoEl.addEventListener('change', () => {
+  trocarModo()
+})
+
+inputs.forEach(input => {
+  input.addEventListener('input', () => {
+    atualizarConteudoInterativo()
+  });
+});
+
+preencherConjuntoLetras(alfabetoEl, "A")

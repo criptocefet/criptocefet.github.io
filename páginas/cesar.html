@@ -1,171 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/styles/cesar.css">
     <title>CriptoCefet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
+
 <body>
-    <div class="note-point">
-        <aside id="n1" class="note">
-            <h3>Definição da Função:</h3>
-            <p>Cada letra do alfabeto original é mapeada para exatamente uma letra no alfabeto cifrado, de acordo com a chave.</p>
-            <h3>Reversibilidade</h3>
-            <p>Como a função é bijetiva, é possível decodificar qualquer mensagem sem perda de informação.</p>
-        </aside>
-    </div>
-    <form>
-        <h2>Cifra de César</h2>
+    <header></header>
+    <script src="../components/importHeader.js"></script>
 
-        <div class="switch-container">
-            <span>Cifrar</span>
-            <label class="switch">
-                <input type="checkbox" onclick="altC()" id="decryptModeC">
-                <span class="slider"></span>
-            </label>
-            <span>Decodificar</span>
+    <main class="container">
+        <h2 title="Clique para mostrar ou esconder a descrição" id="main-title" class="dropdown-btn">Cifra de César <i class="fi fi-rs-angle-small-right icon-square flipped"></i></h2>
+        <div id="description" class="dropdown-content show">
+            A Cifra de César é uma das mais simples e conhecidas técnicas de criptografia. Ela foi criada por Júlio
+            César, ditador romano, para enviar mensagens secretas. Para saber mais sobre a história da Cifra de César,
+            clique <a href="historia-cesar.html">aqui</a>.
+            </p>
+            O método de criptografia consiste em deslocar cada letra da mensagem original em um número \(n\) de casas no
+            alfabeto. Se deslocarmos a letra "A" 1 casa para a direita, por exemplo, obteremos "B":
+            <div class="rel">
+                <input class="cell" type="text" disabled value="A">
+                <div class="icon-square"><i class="fi fi-rs-arrow-right"></i></div>
+                <input class="cell" type="text" disabled value="B">
+            </div>
+            Para que o método funcione, é necessário que o comportamento dele seja como o de uma função bijetiva, ou seja, cada letra na mensagem original deve corresponder a uma única letra na mensagem cifrada, e vice-versa.  Pra garantir isso, o comportamento do deslocamento deve ser cíclico, como um relógio, onde após a letra "Z" voltamos para a letra "A". Por exemplo, se deslocarmos a letra "Z" 1 casa para a direita, obteremos "A":
+            <div class="rel">
+                <input class="cell" type="text" disabled value="Z">
+                <div class="icon-square"><i class="fi fi-rs-arrow-right"></i></div>
+                <input class="cell" type="text" disabled value="A">
+            </div>
+            Vamos tratar cada letra como um número: "A" é 0, "B" é 1, "C" é 2, e assim por diante até "Z" que é 25. Veja a tabela abaixo:
+            <br>
+            <br>
+            <table class="justify-center" border="1" cellpadding="5" cellspacing="0">
+                <tr>
+                    <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td>
+                    <td>K</td><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td>
+                    <td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td>
+                    </tr>
+                <tr>
+                    <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
+                    <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
+                    <td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td>
+                </tr>
+            </table>
+            <br>
+            Para garantir que a cifra se comporte como um relógio, sempre que operarmos com números maiores que 25, devemos aplicar o módulo 26. Assim, 26 mod 26 é 0, 27 mod 26 é 1, e assim por diante. Por exemplo:
+            <br>
+            <br>
+            <p class="align-center">\( 27 \bmod 26 = 1 \)</p>
+            Ou seja, 27 casas para a direita é o mesmo que 1 casa para a direita. Então 27 representa a letra "B", assim como 1. Portanto, podemos dizer que o deslocamento é cíclico e se comporta como uma função bijetiva.
+            
+        </div>
+        
+        <p>Este guia mostra como cifrar e decodificar usando a Cifra de César:</p>
+        <br>
+
+        <p class="step-name-1">Escolha a chave</p>
+        <br>
+        <p>Para usar a cifra, vamos primeiro escolher qual chave vamos usar. A chave deve ser um número natural. Se a chave for 0, não haverá deslocamento.</p>
+        <div class="interactive-content">
+            <i class="fi fi-rs-digital-key"></i><input id="chave" type="number" min="1">
+
+            <div class="dropdown-content">
+                <div class="rel" id="alfabeto"></div>
+
+                <div class="rel"><i class="fi fi-rs-arrow-down"></i></div>
+
+                <div class="rel" id="alfabeto-cifrado"></div>
+            </div>
+        </div>
+        <br>
+        <p class="step-name-1">Cifrar e Decifrar</p>
+        <br>
+        <p>Agora, o que vamos fazer é deslocar cada letra da mensagem original pelo número de casas definido pela chave. Após realizar o deslocamento, vamos aplicar o módulo 26 e então converter os números resultantes de volta para letras. Para voltar à mensagem original, ou seja, decodificar o texto cifrado, basta fazer o processo contrário, subtraindo a chave.</p>
+        <br>
+
+        <div class="interactive-content">
+            <div class="switch-container justify-center">
+                <span>Cifrar</span>
+                <label class="switch">
+                    <input type="checkbox" id="modo">
+                    <span class="slider"></span>
+                </label>
+                <span>Decifrar</span>
+            </div>
+            <div class="comp">
+                <label for="mensagem"><i class="azul fi fi-rs-unlock"></i> Mensagem: <input type="text" id="mensagem" placeholder="Digite sua mensagem"></label>
+            
+
+                <label for="texto-cifrado"><i class="ciano fi fi-rs-lock"></i> Texto cifrado: <input disabled type="text" id="texto-cifrado"></label>
+            </div>
         </div>
 
-        <label for="keyC">🗝️Chave</label>
-        <input id="keyC" type="number" onkeyup="updateCells()">
-
-        <label for="plainTextC">🔠Texto simples</label>
-        <input id="plainTextC" type="text" onkeyup="executeC()">
-
-        <label for="cipherTextC">🔣Texto cifrado</label>
-        <input id="cipherTextC" type="text" disabled onkeyup="executeC()">
-
-        <p>
-            F(A) = A + <input type="number" id="chave" disabled>
-        </p>
-        <!--button type="button" onclick="executeC()">Executar</button-->
-    </form>
-    <div class="container">
-        <span class="chaves1">🔠 {</span>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-        <span id="c1" class="chaves1">}</span>
-        <p> </p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p>↓</p><p> </p>
-        <span class="chaves2">🔣 {</span>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-        <span id="c2" class="chaves2">}</span>
-    </div>
-
-    <div class="nota">
-        <h3>Injetividade</h3>
-        <p>Nenhuma letra cifrada se repete para diferentes letras originais (ou seja, não há colisões).</p>
-        <h3>Sobrejetividade</h3>
-        <p></p>Toda letra do alfabeto cifrado é atingida por alguma letra do original.</p>
-    </div>
-
-    <!--div class="containerVertical"> DEACTIVATED (Não está funcionando)
-        <div class="column">
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-            <input type="text" class="staticCell" disabled>
-        </div>
-        <div class="column">
-            <p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p><p>→</p>
-        </div>
-        <div class="column">
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-            <input type="text" class="cell" disabled>
-        </div>
-    </div-->
-
-    <button onclick="toggleInfo()" id="info" class="activated">i</button>
-    <script src="/src/scripts/cesar.js"></script>
+        <p>Conteúdos relacionados:</p>
+        <ul>
+        </ul>
+    </main>
+    <script src="../scripts/geral.js"></script>
+    <script src="../scripts/cesar.js"></script>
 </body>
-</html>
 
-<!--
-    Dicionário:
-    - alt: alternar cifrar/decodificar
-    - cipher: texto cifrado
-    - plain: texto simples
-    - C: relativo à cifra de César
--->
+</html>

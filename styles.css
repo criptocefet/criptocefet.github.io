@@ -1,0 +1,484 @@
+/* Ícones */
+@import url('https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css');
+
+button>i {
+    font-size: 2em;
+}
+
+.icon-square {
+    font-size: 25px;
+    width: 35px;
+    height: 35px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+}
+
+.fi-rs-angle-small-down,
+.fi-rs-angle-small-right {
+    line-height: 40px;
+}
+
+.fi-rs-digital-key {
+    color: var(--azul);
+}
+
+/* Temas */
+.tema-escuro {
+    color: rgb(200, 200, 200);
+    background-color: rgb(12, 12, 22);
+    transition: color 0.3s;
+    transition: background-color 0.3s;
+}
+
+.tema-claro {
+    background-color: var(--branco);
+    color: black;
+    transition: color 0.3s;
+    transition: background-color 0.3s;
+}
+
+/* Paleta de cores */
+:root {
+    --azul-escuro: #07183c;
+    --azul: #1548b7;
+    --azul-claro: #5b89ec;
+    --ciano: #1abbdf;
+    --cinza: #d1d4e0;
+    --cinza-claro: #dfe5f1;
+    --cinza-escuro: #bcbec9;
+    --branco: #F5F8FA;
+    --preto: #000000;
+}
+
+/* Contêiners */
+body,
+html {
+    margin: 0;
+}
+
+body {
+    background-color: var(--branco);
+    background-repeat: repeat;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    text-align: justify;
+}
+
+header {
+    background: linear-gradient(to right, var(--azul-escuro), var(--azul));
+    background-color: var(--azul-escuro);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#site-brand {
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: flex-start;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: center;
+    gap: 30px;
+    width: 800px;
+    height: 22px;
+}
+
+main {
+    flex: 1;
+    margin: 0 auto;
+    width: 800px;
+    padding-left: 4%;
+    padding-right: 4%;
+    min-height: 88vh;
+    border: none;
+}
+
+main>* {
+    margin-top: 0;
+    margin-bottom: 0;
+    /*ajustar as margens das coisas*/
+}
+
+.interactive-content {
+    border: solid 1px rgba(255, 255, 255, 0.185);
+    padding: 1vw;
+    background-color: rgba(70, 69, 102, 0.153);
+    border-radius: 8px;
+    margin: 1vh 0;
+}
+
+/* Elementos */
+#logo {
+    height: 40px;
+}
+
+header h1 {
+    height: 40px;
+    line-height: 40px;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: 400;
+    margin: 0 0 0 1vw;
+    color: #fff;
+}
+
+nav a:hover {
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #3af,
+        0 0 20px #3af,
+        0 0 40px #3af;
+}
+
+#main-title {
+    font-weight: normal;
+    font-size: 1.6em;
+    padding-bottom: 0.5vh;
+    margin: 2vh 0;
+    border-bottom: solid 1px;
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.5em;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--branco);
+}
+
+a {
+    color: var(--azul-claro);
+    text-decoration: none;
+}
+
+input {
+    /*background-color: #1d1d1d;*/
+    border: solid 1px rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    color: inherit;
+    margin-left: 1vw;
+    font-family: inherit;
+}
+
+label > input:disabled {
+    background-color: #00000000;
+    border: none;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.5);
+}
+
+ul {
+    margin-top: 0;
+}
+
+#guide-container-1 {
+    padding-left: 2vw;
+    margin-bottom: 5vh;
+}
+
+#guide-container-2 {
+    padding-left: 2vw;
+}
+
+#guide-title-1 {
+    margin: 0 auto;
+    height: 30px;
+    line-height: 30px;
+    width: fit-content;
+    padding: 2px 5px;
+    color: var(--azul);
+    border: solid 2px var(--azul);
+    border-radius: 8px;
+}
+
+#guide-title-2 {
+    margin: 0 auto;
+    height: 30px;
+    line-height: 30px;
+    width: fit-content;
+    padding: 2px 5px;
+    color: var(--ciano);
+    border: solid 2px var(--ciano);
+    border-radius: 8px;
+}
+
+.step-name-1 {
+    display: inline-block;
+    padding: 5px;
+    margin: 1vh 0;
+    background-color: var(--azul);
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.step-name-2 {
+    display: inline-block;
+    padding: 5px;
+    margin: 1vh 0;
+    background-color: var(--ciano);
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+#related-content {
+    margin-top: 5vh;
+}
+
+.dropdown-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    font-family: inherit;
+    font-size: inherit;
+    margin-top: 1vh;
+}
+
+.dropdown-btn>i {
+    transition: transform 0.3s ease;
+}
+
+.flipped {
+    transform: rotate(90deg);
+}
+
+.dropdown-content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    margin-bottom: 1vh;
+}
+
+.dropdown-content.show {
+    max-height: 100vh;
+    /* ajuste se precisar suportar mais conteúdo */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none;
+}
+
+.matrix {
+    background-color: rgba(255, 0, 0, 0);
+    border-left: solid 3px rgba(255, 255, 255, 0.7);
+    border-right: solid 3px rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    width: fit-content;
+    padding: 0.5vh 6px;
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+.matrix>* {
+    margin: 0;
+}
+
+.cell {
+    margin: 2px;
+    width: fit-content;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(70, 69, 102, 0.2);
+    font-size: 1em;
+    font-family: 'Inter', sans-serif;
+}
+
+input:not(:disabled).cell {
+    box-shadow: inset 0 0 0 2px var(--branco),
+        0 1px 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.l1 {
+    grid-row: 1;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.rel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-self: center;
+    margin-top: 2vh;
+}
+
+.comp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-self: center;
+    margin-top: 2vh;
+}
+
+.rel-sign {
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+ul {
+    margin-bottom: 1vh;
+}
+
+var {
+    font-weight: bold;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.justify-center {
+    justify-self: center;
+}
+
+.yes-icon {
+    color: green;
+    font-size: 15px;
+}
+
+.no-icon {
+    color: rgb(131, 0, 0);
+    font-size: 15px;
+}
+
+.gray-scope-line {
+    padding-left: 1vw;
+    border-left: solid 2px var(--cinza);
+}
+
+.blue-scope-line {
+    padding-left: 1vw;
+    border-left: solid 2px var(--azul);
+}
+
+.cyan-scope-line {
+    padding-left: 1vw;
+    border-left: solid 2px var(--ciano);
+}
+
+.azul {
+    color: var(--azul);
+}
+
+.ciano {
+    color: var(--ciano);
+}
+
+/* Slider */
+/* Container centralizado */
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+}
+
+/* Esconde o input padrão */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Caixa do switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+/* Barra deslizante */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--azul);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+/* Botão redondo do switch */
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Quando está ativado */
+input:checked+.slider {
+    background-color: var(--ciano);
+}
+
+input:checked+.slider::before {
+    transform: translateX(24px);
+}
+
+
+/* Responsividade */
+@media (max-width: calc(800px + 8vw)) {
+    main {
+        width: calc(92% - 1px);
+    }
+
+    header {
+        width: 100%;
+    }
+
+    #site-brand {
+        width: calc(92% - 1px);
+    }
+
+    nav {
+        width: calc(92% - 1px);
+    }
+}
