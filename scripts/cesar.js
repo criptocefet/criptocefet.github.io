@@ -73,7 +73,7 @@ function atualizarConteudoInterativo() {
   if (chaveEl.value != '') chaveEl.nextElementSibling.classList.add('show')
   if (chaveEl.value === '') chaveEl.nextElementSibling.classList.remove('show')
 
-  let chave = chaveEl.value
+  let chave = parseInt(chaveEl.value, 10) || 0;
 
   let c = encrypt(chave, 'A') // c é a primeira letra do alfabeto cifrado
 
