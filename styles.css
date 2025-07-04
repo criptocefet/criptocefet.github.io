@@ -233,20 +233,14 @@ ul {
 
 .step-name-1 {
     display: inline-block;
-    padding: 5px;
     margin: 1vh 0;
-    background-color: var(--azul);
-    border-radius: 8px;
-    color: #ffffff;
+    border-bottom: solid 2px var(--azul);
 }
 
 .step-name-2 {
     display: inline-block;
-    padding: 5px;
     margin: 1vh 0;
-    background-color: var(--ciano);
-    border-radius: 8px;
-    color: #ffffff;
+    border-bottom: solid 2px var(--ciano);
 }
 
 #related-content {
