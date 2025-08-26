@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../styles.css" />
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.1/math.min.js"></script>
   <script defer src="../scripts/geral.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <script defer src="../scripts/hill.js"></script>
 </head>
 
@@ -25,109 +26,193 @@
     <h2 id="main-title">Cifra de Hill</h2>
     <p id="description">A Cifra de Hill foi criada por Lester S. Hill em 1929, com o objetivo de tornar a análise de
       padrões mais difícil
-      de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras. Veja mais sobre a história da Cifra de Hill <a href="">aqui</a>.
+      de ser praticada. Ela utiliza matrizes para criptografar mensagens, tornando-as mais seguras. Veja mais sobre a
+      história da Cifra de Hill <a href="">aqui</a>.
       <br><br>
-      A mensagem é convertida em números e dividida em blocos de tamanho igual à ordem da matriz chave. Cada bloco é então organizado em uma matriz (vetor coluna). Essa matriz de bloco é multiplicada pela matriz chave, resultando em uma matriz criptografada para aquele bloco.
-      A matriz criptografada de cada bloco pode ser revertida para o bloco original ao ser multiplicada pela matriz inversa da chave.
+      A mensagem é convertida em números e dividida em blocos de tamanho igual à ordem da matriz chave. Cada bloco é
+      então organizado em uma matriz (vetor coluna). Essa matriz de bloco é multiplicada pela matriz chave, resultando
+      em uma matriz criptografada para aquele bloco.
+      A matriz criptografada de cada bloco pode ser revertida para o bloco original ao ser multiplicada pela matriz
+      inversa da chave.
       <br><br>
       Este guia tem dois passo a passos: um para criptografar e outro para descriptografar usando a Cifra de Hill.
     </p>
     <br>
 
+    <h3 id="guide-title-1">Como Cifrar <i class="fi fi-rs-lock"></i>​​</h3>
     <div id="guide-container-1" class="blue-scope-line">
-      <h3 id="guide-title-1">Como Cifrar <i class="fi fi-rs-lock"></i>​​</h3>
 
-      <p class="step-name-1">1º passo: Escolher a chave</p>
+      <p class="step-name dropdown-btn">1º passo: Escolher a chave <i
+          class="fi fi-rs-angle-small-right icon-square flipped"></i></p>
+      <div class="dropdown-content show">
+        <p>A matriz chave \(K\) deve atender às seguintes condições:</p>
+
+        <ul>
+          <li> Ser uma matriz quadrada \(n \times n\). </li>
+          <li> O determinante não pode ser nulo no módulo \(m\): \[ \det(K) \not\equiv 0 \pmod{28} \] </li>
+          <li> O determinante deve ser <b>coprimo</b> com \(m\), ou seja: \[ \gcd(\det(K), 28)=1 \] </li>
+          <li> Deve existir a inversa da matriz no módulo \(m\): \[ K^{-1} \pmod{28} \text{ existe} \] </li>
+        </ul>
+        <br>
+        Escolha 3 elementos da matriz chave, e o quarto elemento será calculado automaticamente para garantir que o
+        determinante seja válido.
+        <br>
+        <br>
+        <button class="gray-scope-line dropdown-btn"> Como calcular o determinante? <i
+            class="fi fi-rs-angle-small-right icon-square flipped"></i></button>
+        <div class="dropdown-content show gray-scope-line">
+          O determinante de uma matriz \(K\) de ordem 2 é calculado como:
+          \[
+          K =
+          \begin{bmatrix}
+          k_{11} & k_{12} \\
+          k_{21} & k_{22}
+          \end{bmatrix}
+          \]
+
+          \[
+          \det(K) = k_{11} \cdot k_{22} - k_{12} \cdot k_{21}
+          \]
+        </div>
+      </div>
       <div class="interactive-content container rel">
         <div class="matrix" id="key-matrix-1">
-          <input class="cell l1" type="number" id="key-1-1">
-          <input class="cell l1" type="number" id="key-1-2">
-          <input class="cell" type="number" id="key-2-1">
-          <input class="cell" type="number" id="key-2-2" disabled>
+          <input class="cell l1" type="number" id="key-1-1" min="1" max="99" value="1">
+          <input class="cell l1" type="number" id="key-1-2" min="1" max="99" value="1">
+          <input class="cell" type="number" id="key-2-1" min="1" max="99" value="1">
+          <input class="cell" type="number" id="key-2-2" disabled value="2">
         </div>
       </div>
 
-      <p>
-      <p class="step-name-1">2º passo: Converter a mensagem em números</p><br>
-      Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar. As letras da mensagem devem ser convertidas em números, assim permitindo operações. A tabela abaixo mostra como a conversão será feita.
-      </p>
-      <table border="1" cellpadding="5" cellspacing="0">
-        <tr>
-          <td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td>
-          <td>K</td><td>L</td><td>M</td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td>
-          <td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td> </td><td>.</td>
-        </tr>
-        <tr>
-          <td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-          <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td>
-          <td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td>
-        </tr>
-      </table>
+      <p id="determinant-expression"></p>
 
-      <p>
-      Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de colunas
-      seja par.
-      </p>
+      <br>
+      <p class="step-name dropdown-btn">2º passo: Converter a mensagem em números <i
+          class="fi fi-rs-angle-small-right icon-square flipped"></i></p>
+      <div class="dropdown-content show">
+        <br>
+        <p>
+          Para usar a Cifra de Hill, você deve fornecer uma mensagem que deseja criptografar. As letras da mensagem
+          devem
+          ser convertidas em números, assim permitindo operações. A tabela abaixo mostra como a conversão será feita.
+        </p>
+
+        <table border="1" cellpadding="5" cellspacing="0">
+          <tr>
+            <td>A</td>
+            <td>B</td>
+            <td>C</td>
+            <td>D</td>
+            <td>E</td>
+            <td>F</td>
+            <td>G</td>
+            <td>H</td>
+            <td>I</td>
+            <td>J</td>
+            <td>K</td>
+            <td>L</td>
+            <td>M</td>
+            <td>N</td>
+            <td>O</td>
+            <td>P</td>
+            <td>Q</td>
+            <td>R</td>
+            <td>S</td>
+            <td>T</td>
+            <td>U</td>
+            <td>V</td>
+            <td>W</td>
+            <td>X</td>
+            <td>Y</td>
+            <td>Z</td>
+            <td> </td>
+            <td>.</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td>22</td>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+          </tr>
+        </table>
+
+
+        <p>
+          Vamos colocar a mensagem em um matriz de duas linhas e completar com espaços vazios para que o número de
+          colunas
+          seja par.
+        </p>
+      </div>
 
       <div class="interactive-content container">
-        <label>Mensagem:</label><input id="plainText" type="text" placeholder="Digite sua mensagem aqui" maxlength="6">
+        <label>Mensagem:</label><input value="abcde" id="plainText" type="text" pattern="[A-Za-z. ]*" placeholder="Digite sua mensagem aqui"
+          maxlength="6">
         <div class="rel">
           <div class="matrix" id="text-message-1"></div>
-          <p class="rel-sign">➡️</p>
+          <img src="../imgs/arrow-right.png" class="icon-png">
           <div class="matrix" id="numeric-message-1"></div>
         </div>
-        <button class="dropdown-btn">Quais são as regras para a chave? <i class="fi fi-rs-angle-small-right icon-square"></i></button>
-        <div class="dropdown-content">
-            <p></p>
-        </div>
+        <br>
       </div>
+      <p class="step-name dropdown-btn">3º passo: Criptografar a mensagem <i
+          class="fi fi-rs-angle-small-right icon-square flipped"></i></p>
+      <div class="dropdown-content show">
+        <p>
+          A matriz da mensagem será dividida em blocos de 2x1 (2 linhas e 1 coluna). Cada bloco será multiplicado pela
+          matriz chave \(K\). O resultado será uma nova matriz, que representa o bloco cifrado.
+          <br><br>
+          As multiplicações de matrizes são feitas da seguinte forma:
+        </p>
 
-      <p>
-      <p class="step-name-1">3º passo: Criptografar a mensagem</p><br>
-      Agora, multiplicaremos a mensagem pela matriz chave para criptografar. O resultado será uma nova matriz de
-      números.
-      <br><br>
-      Depois, vamos converter os números para letras, assim, será formada a mensagem cifrada.
-      </p>
-      <div class="interactive-content container">
-        <div class="rel">
-          <div class="matrix" id="key-matrix-2"></div>
-          <p class="rel-sign">x</p>
-          <div class="matrix" id="numeric-message-2"></div>
-          <p class="rel-sign">=</p>
-          <div class="matrix" id="numeric-encrypted-1"></div>
-          <p class="rel-sign">➡️</p>
-          <div class="matrix" id="text-encrypted-1"></div>
-        </div>
-        <!--<div class="dropdown" id="dropdown-step-3">Processo detalhado ►</div>-->
       </div>
+      <div id="encrypting-process" class="interactive-content container"></div>
+      <div id="conversion-process-1" class="interactive-content rel"></div>
     </div>
 
+    <h3 id="guide-title-2">Passo a passo para Decodificar <i class="fi fi-rs-unlock"></i></h3>
     <div id="guide-container-2" class="cyan-scope-line">
-      <h3 id="guide-title-2">Passo a passo para Decifrar <i class="fi fi-rs-unlock"></i></h3>
-      <p>
-      <p class="step-name-2">1º passo: Inverter a matriz chave</p><br>
-      Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa.
-      Para isso, vamos primeiro inverter a matriz chave:
+
+      <p class="step-name dropdown-btn">1º passo: Inverter a matriz chave <i
+          class="fi fi-rs-angle-small-right icon-square flipped"></i></p>
+      <p class="dropdown-content show">
+        Para descriptografar, precisamos multiplicar a mensagem cifrada pela matriz chave inversa.
+        Para isso, vamos primeiro inverter a matriz chave:
       </p>
-      <div class="interactive-content container rel">
-        <div class="matrix" id="inv-key-matrix-1"></div>
+      <div class="interactive-content rel">
+        <div id="inv-key-matrix" class="matrix"></div>
       </div>
 
-      <p>
-      <p class="step-name-2">2º passo: Decifrar a mensagem</p><br>
-      Agora, multiplicaremos a mensagem cifrada pela inversa da matriz chave.
-      O resultado será a mensagem original.
-      </p>
-      <div class="interactive-content container rel">
-        <div class="matrix" id="inv-key-matrix-2"></div>
-        <p class="rel-sign">x</p>
-        <div class="matrix" id="numeric-encrypted-2"></div>
-        <p class="rel-sign">=</p>
-        <div class="matrix" id="numeric-message-3"></div>
-        <p class="rel-sign">➡️</p>
-        <div class="matrix" id="text-message-2"></div>
-      </div>
+
+      <p class="step-name dropdown-btn">2º passo: Decodificar a mensagem <i
+          class="fi fi-rs-angle-small-right icon-square flipped"></i></p>
+      <p class="dropdown-content show">Agora, multiplicaremos a mensagem cifrada pela inversa da matriz chave.
+        O resultado será a mensagem original.</p>
+      <div id="decrypting-process" class="interactive-content container"></div>
+      <div id="conversion-process-2" class="interactive-content rel"></div>
     </div>
 
     <p>Conteúdos relacionados:</p>
@@ -137,6 +222,8 @@
     </ul>
 
   </main>
+
+  <button id="download-button"><i class="fi fi-rs-download icon-square"></i></button>
 </body>
 
 </html>
