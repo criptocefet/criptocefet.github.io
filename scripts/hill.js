@@ -45,6 +45,7 @@ alphabetMap.set(27, '.')
 
 const mod = 28 // Tamanho do alfabeto (a-z, espaço, ponto)
 
+
 function createElementMatrix() {
     let matrixEl = document.createElement('div')
     matrixEl.className = 'matrix'
@@ -86,35 +87,45 @@ function numericMatrixToTextMatrix(numericMatrix) {
     return letterMatrix;
 }
 
-function assembleHillEncryption(column, keyMatrix, result) {
+function assembleHillEncryption(column, keyMatrix, result, modResult) {
     let containerEl = document.createElement('div')
     containerEl.className = 'rel'
-
-    let columnEl = document.createElement('div')
-    columnEl.className = 'matrix'
-    fillMatrix(columnEl, column)
-
+    
     let keyEl = document.createElement('div')
     keyEl.className = 'matrix'
     fillMatrix(keyEl, keyMatrix)
-
+    
+    let columnEl = document.createElement('div')
+    columnEl.className = 'matrix'
+    fillMatrix(columnEl, column)
+    
     let resultEl = document.createElement('div')
     resultEl.className = 'matrix'
     fillMatrix(resultEl, result)
 
-    let timesSignEl = document.createElement('img')
-    timesSignEl.src = '../imgs/cross-small.png'
-    timesSignEl.className = 'icon-png'
+    let modResultEl = document.createElement('div')
+    modResultEl.className = 'matrix'
+    fillMatrix(modResultEl, modResult)
 
-    let equalSignEl = document.createElement('img')
-    equalSignEl.src = '../imgs/equals.png'
-    equalSignEl.className = 'icon-png'
+    let equalIconEl = document.createElement('img')
+    equalIconEl.src = '../imgs/equals.png'
+    equalIconEl.className = 'icon-png'
 
-    containerEl.appendChild(columnEl)
-    containerEl.appendChild(timesSignEl)
+    let timesIconEl = document.createElement('img')
+    timesIconEl.src = '../imgs/cross-small.png'
+    timesIconEl.className = 'icon-png'
+
+    let arrowRightIconEl = document.createElement('img')
+    arrowRightIconEl.src = '../imgs/arrow-right.png'
+    arrowRightIconEl.className = 'icon-png'
+
     containerEl.appendChild(keyEl)
-    containerEl.appendChild(equalSignEl)
+    containerEl.appendChild(timesIconEl)
+    containerEl.appendChild(columnEl)
+    containerEl.appendChild(equalIconEl)
     containerEl.appendChild(resultEl)
+    containerEl.appendChild(arrowRightIconEl)
+    containerEl.appendChild(modResultEl)
 
     return containerEl
 }
@@ -138,14 +149,6 @@ function applyHillCipher(numericMatrix, keyMatrix) {
         outputMatrix[1].push(...outputColumn[1]);
     }
     return outputMatrix
-}
-
-function encrypt(message, keyMatrix) {
-    return applyHillCipher(message, keyMatrix)
-}
-
-function decrypt(message, inverseKeyMatrix) {
-    return applyHillCipher(message, inverseKeyMatrix);
 }
 
 function fillMatrix(matrixEl, matrix) {
@@ -284,8 +287,9 @@ function fillInteractiveContent() {
             [numericMatrix[0][i]],
             [numericMatrix[1][i]]
         ]
-        let result = applyHillCipher(column, keyMatrix)
-        encryptingProcessEl.appendChild(assembleHillEncryption(column, keyMatrix, result))
+        let result = math.multiply(keyMatrix, column)
+        let modResult = applyHillCipher(column, keyMatrix)
+        encryptingProcessEl.appendChild(assembleHillEncryption(column, keyMatrix, result, modResult))
     }
 
     // filler line
@@ -300,12 +304,12 @@ function fillInteractiveContent() {
     let encryptedTextMatrixEl = createElementMatrix()
     fillMatrix(encryptedTextMatrixEl, encryptedTextMatrix)
 
-    let arrowSignEl = document.createElement('img')
-    arrowSignEl.src = '../imgs/arrow-right.png'
-    arrowSignEl.className = 'icon-png'
+    let arrowIconEl = document.createElement('img')
+    arrowIconEl.src = '../imgs/arrow-right.png'
+    arrowIconEl.className = 'icon-png'
 
     conversionProcess1El.appendChild(encryptedNumericMatrixEl)
-    conversionProcess1El.appendChild(arrowSignEl)
+    conversionProcess1El.appendChild(arrowIconEl)
     conversionProcess1El.appendChild(encryptedTextMatrixEl)
 
     conversionProcess1El.parentNode.insertBefore(conversionText1El, conversionProcess1El)
@@ -322,18 +326,19 @@ function fillInteractiveContent() {
             [encryptedNumericMatrix[0][i]],
             [encryptedNumericMatrix[1][i]]
         ]
-        let result = applyHillCipher(column, invKeyMatrix)
-        decryptingProcessEl.appendChild(assembleHillEncryption(column, invKeyMatrix, result))
+        let result = math.multiply(keyMatrix, column)
+        let modResult = applyHillCipher(column, invKeyMatrix)
+        decryptingProcessEl.appendChild(assembleHillEncryption(column, invKeyMatrix, result, modResult))
     }
 
     // converting the result to text
-    let numericDecryptedMatrix = decrypt(encryptedNumericMatrix, invKeyMatrix)
+    let numericDecryptedMatrix = applyHillCipher(encryptedNumericMatrix, invKeyMatrix)
     let numericDecryptedMatrixEl = createElementMatrix()
     fillMatrix(numericDecryptedMatrixEl, numericDecryptedMatrix)
 
     conversionProcess2El.parentNode.insertBefore(conversionText2El, conversionProcess2El)
     conversionProcess2El.appendChild(numericDecryptedMatrixEl)
-    conversionProcess2El.appendChild(arrowSignEl.cloneNode())
+    conversionProcess2El.appendChild(arrowIconEl.cloneNode())
     conversionProcess2El.appendChild(textMatrixEl.cloneNode(true))
 }
 
