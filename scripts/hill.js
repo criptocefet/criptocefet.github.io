@@ -347,5 +347,3 @@ inputs.forEach(input => {
         fillInteractiveContent()
     });
 });
-
-fillInteractiveContent()
