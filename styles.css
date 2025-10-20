@@ -704,7 +704,8 @@ strong {
     }
 
     nav {
-        width: calc(92% - 1px);
+        justify-content: center;
+        width: 100%;
     }
 
     #main-title {
@@ -779,6 +780,12 @@ strong {
         cellpadding: 0;
         cellspacing: 0;
         font-size: 0.79em;
+    }
+}
+
+@media(max-width: 450px) {
+    nav {
+        font-size: 3vw;
     }
 }
 
